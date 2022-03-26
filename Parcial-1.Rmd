@@ -1,116 +1,112 @@
 ---
 title: "PARCIAL # 1"
-author: "CRISTIAN ALONSO CARDONA - KEVIN ANDRES MACIAS OCAMPO "
-date: '2022-03-24'
+knit: (function(input_file, encoding) {
+  out_dir <- 'parcial1';
+  rmarkdown::render(input_file,
+ encoding=encoding,
+ output_file=file.path(dirname(input_file), out_dir, 'index.html'))})
+author: "CRISTIAN ALONSO CARDONA - KEVIN ANDRES MACIAS OCAMPO"
+date: "24/3/2022"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+<h3>1.</h3> La tabla mostrada contiene valores de población, en cientos de miles, de las diez ciudades más
+pobladas de cuatro países en el año 1967:
+Argentina EE. UU. Holanda Japón
+29.66 77.81 8.68 110.21
+7.61 35.50 7.31 32.14
+6.35 24.79 6.02 18.88
+4.10 20.02 2.64 16.38
+3.80 16.70 1.75 13.37
+2.75 9.39 1.72 11.92
+2.70 9.38 1.51 10.71
+2.69 8.76 1.42 7.80
+2.51 7.63 1.31 7.70
+2.4 4 7.50 1.29 7.00
+
+<h3>DATOS</h3> 
+
+```{r}
+poblacion <- c(29.66, 7.61, 6.35, 4.10, 3.8, 2.75, 2.70, 2.69, 2.51, 2.44,
+               77.81, 35.50, 24.79, 20.02, 16.70, 9.39, 9.38, 8.76, 7.63, 7.5,
+               8.68, 7.31, 6.02, 2.64, 1.75, 1.72, 1.51, 1.42, 1.31, 1.29,
+               110.21, 32.14, 18.88, 16.38, 13.37, 11.92, 10.71, 7.8, 7.7, 7);
+paises <- c("argentina","argentina","argentina","argentina","argentina","argentina",
+            "argentina","argentina","argentina","argentina","usa","usa","usa","usa","usa",
+            "usa","usa","usa","usa","usa","holanda", "holanda", "holanda","holanda","holanda",
+            "holanda","holanda","holanda","holanda","holanda","japon", "japon",
+            "japon","japon","japon","japon","japon","japon","japon","japon");
+paises <- factor(paises); paises
 ```
 
-### 1.
+<h3>TAMAÑO</h3> 
 
-La tabla mostrada contiene valores de población, en cientos de miles, de las diez ciudades más pobladas de cuatro países en el año 1967:
-
-| *Argentina* | *EE.UU* | *Holanda* | *Japón* |
-|:-----------:|:-------:|:---------:|:-------:|
-|    29.66    |  77.81  |   8.68    | 110.21  |
-|    7.61     |  35.50  |   7.31    |  32.14  |
-|    6.35     |  24.79  |   6.02    |  18.88  |
-|    4.10     |  20.02  |   2.64    |  16.38  |
-|    3.80     |  16.70  |   1.75    |  13.37  |
-|    2.75     |  9.39   |   1.72    |  11.92  |
-|    2.70     |  9.38   |   1.51    |  10.71  |
-|    2.69     |  8.76   |   1.42    |  7.80   |
-|    2.51     |  7.63   |   1.31    |  7.70   |
-|    2.44     |  7.50   |   1.29    |  7.00   |
-
-**DATOS**
-
-```{r pressure, echo=FALSE}
-poblacion <- c(29.66, 7.61, 6.35, 4.10, 3.8, 2.75, 2.70, 2.69, 2.51, 2.44
-             ,77.81, 35.50, 24.79, 20.02, 16.70, 9.39, 9.38, 8.76, 7.63, 7.5
-             ,8.68, 7.31, 6.02, 2.64, 1.75, 1.72, 1.51, 1.42, 1.31, 1.29
-             ,110.21, 32.14, 18.88, 16.38, 13.37, 11.92, 10.71, 7.8, 7.7, 7
-             );
-
-paises <- c('argentina','argentina','argentina','argentina','argentina',
-            'argentina','argentina','argentina','argentina','argentina',
-             "usa","usa","usa","usa","usa","usa","usa","usa","usa","usa",
-            'holanda','holanda','holanda','holanda','holanda',
-            'holanda','holanda','holanda','holanda','holanda',
-            'japon','japon','japon','japon','japon','japon',
-            'japon','japon','japon','japon'
-            );
-
-```
-
-**TAMAÑO**
-
-```{r pressure, echo=FALSE}
+```{r}
 length(poblacion);
 length(paises);
 ```
 
-**PUNTO A** Construya un box-plot e identifique los puntos extremos. ¿Cuáles son las características más sobresalientes? ¿Hay outliers?
+Punto A
 
-**PUNTO B**
+Construya un box-plot e identifique los puntos extremos. ¿Cuáles son las características más sobresalientes? ¿Hay outliers?
+
+
+Punto B
 
 Compare los centros de cada población, sus dispersiones y su simetría. ¿Cuál es el país más homogéneamente habitado? ¿Cuáles son las características más sobresalientes? ¿Hay outliers?
 
-**DESARROLLO**
+<h3>DESARROLLO</h3> 
 
-```{r  pressure, echo=FALSE}
+```{r}
 mediageneral = tapply(poblacion, paises, mean); mediageneral
 ```
 
-```{r  pressure, echo=FALSE}
+```{r}
 bplot = boxplot(poblacion~paises, main='Población de ciudades por país en el año 1967');
 
 xi <-  seq(bplot$n)
 points(xi, mediageneral, col = 'blue', pch=20);
 ```
 
-```{r  pressure, echo=FALSE}
+```{r}
 desvest = tapply(poblacion, paises, sd); desvest
 ```
 
-**ANALISIS**
+ <h3>ANALISIS</h3> 
 
-**Punto A** Hay outliers en cada pais (1 por cada uno) menos en holando donde los datos estan agrupados entre el Q1 y Q3 (50%) estan mas homogeneos. En japon la mediana está en el centro de la caja, por lo tanto la distribución es simétrica Argentina tiene Asimetria negativa pues la parte más larga de la caja es superior a la mediana Holanda tiene asimetria positiva como tambien usa.
+Punto A
 
-**Punto B** Holanda es el pais con los datos más agrupados (menos dispersos). Japon es el pais con los datos más dispersos debe ser que en una cuidad tiene 110.21 de cientos de miles de habitantes, Holanda no tiene outliers.
+ Hay outliers en cada pais (1 por cada uno) menos en holando donde los datos estan agrupados entre el Q1 y Q3 (50%) estan mas homogeneos. En japon la mediana está en el centro de la caja, por lo tanto la distribución es simétrica Argentina tiene Asimetria negativa pues la parte más larga de la caja es superior a la mediana Holanda tiene asimetria positiva como tambien usa.
 
-### 2.
+PunTo B
+
+Holanda es el pais con los datos más agrupados (menos dispersos). Japon es el pais con los datos más dispersos debe ser que en una cuidad tiene 110.21 de cientos de miles de habitantes, Holanda no tiene outliers.
+
+<h2>2.</h2> 
 
 Avianca se encuentra estudiando la situación de venta de puesto en el vuelo Armenia -- Bogotá puesto que ha identificado que el 2% de las personas que reservaron puesto, no se presentan a la hora del embarque. Teniendo en cuenta que el avión A320 utilizado en esta ruta tiene una capacidad para 180 pasajeros, la empresa decide vender 181 tiquetes. ¿Cuál es la probabilidad de que todas las personas que llegan a embarque puedan tener su silla asegurada y no se presenten quejas por "sobre-vender" sillas ante la aeronáutica civil? Asuma que las llegadas de los pasajeros siguen una distribución Poisson.
 
-```{r  pressure, echo=FALSE}
+```{r}
 probInasistenciaPasajeros <- 0.02
 lambda <- round(180-(180*probInasistenciaPasajeros)); lambda
-```
-
-```{r  pressure, echo=FALSE}
 probMenor181Pasajeros <- ppois(181, lambda = lambda); probMenor181Pasajeros*100;
 ```
-
-```{r  pressure, echo=FALSE}
-  plot = plot(ppois(0:181, 176), type = "s", lwd = 2,
-         main = "Función de distribución de probabilidad para avión A320",
-         xlab = "Número de pasajeros", ylab = "F(x)")+
-    arrows(180,probMenor181Pasajeros,0,probMenor181Pasajeros,col = 'blue', pch=18);
+```{r}
+plot = plot(ppois(0:181, 176), type = "s", lwd = 2,
+     main = "Función de distribución de probabilidad para avión A320",
+     xlab = "Número de pasajeros", ylab = "F(x)")+
+arrows(180,probMenor181Pasajeros,0,probMenor181Pasajeros,col = 'green', pch=18);
 ```
 
-**ANALISIS**
+<h3>ANALISIS</h3> 
 
-Teniendo en cuenta los datos la probabilidad de que todas las personas que llegan a embarque puedan tener su silla asegurada y no se presenten quejas por "sobre-vender" es de 66%.
+Teniendo en cuenta los datos la probabilidad que todas las personas tengan una silla asugurada es de y no se presenten quejas por “sobre-vender” es de 66% 
 
-### 3.
+<h2>3.</h2> 
 
 En la planta envasadora de Coca-Cola FEMSA ubicada en Tocancipá se realiza el embotellado de la CocaCola presentación de 400 mL (en promedio), con una desviación estándar de 5 mL (mililitros). Si se sabe por experiencia que este proceso de embotellado sigue una distribución normal, y también se sabe que todo producto con más de 415 mL es declarado como NO CONFORME. Determine el porcentaje de las botellas de gaseosa que son declaradas producto NO CONFORME.
 
-```{r  pressure, echo=FALSE}
+```{r}
 media <- 400;
 desvEstandar <- 5;
 PNC <- 415;
@@ -120,10 +116,11 @@ porcentajePNC<-probPNC*100;
 porcentajePNC;
 ```
 
-```{r  pressure, echo=FALSE}
+```{r}
 plot = plot(pnorm(0:500, mean=media, sd = desvEstandar, lower.tail = FALSE), type = "s", lwd = 2,
      main = "Distribución de probabilidad para productos no conformes Coca Cola",
      xlab = "Cantidad de mL", ylab = "F(x)")+points(415:500,pnorm(415:500, mean=media, sd = desvEstandar, lower.tail = FALSE), col="red");
 ```
 
-**ANALISIS** El porcentaje de las botellas de gaseosa que son declaradas producto **NO CONFORME** es de 0.1349898%.
+<h3>ANALISIS</h3> 
+El porcentaje de las botellas de gaseosa que son declaradas producto NO CONFORME es de 0.1349898%.
